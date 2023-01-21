@@ -7,17 +7,19 @@ import (
 	"strconv"
 )
 
-var (
-	versionOpt bool
-)
+const version string = "1.0.0"
+
+var versionOpt bool
 
 func main() {
 	flag.Parse()
 
 	flag.BoolVar(&versionOpt, "version", false, "show version")
 	if versionOpt {
-		fmt.Println("")
+		fmt.Println(version)
+		return
 	}
+
 	for {
 		fmt.Print(">>> ")
 		var s string
