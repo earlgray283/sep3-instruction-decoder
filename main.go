@@ -53,10 +53,14 @@ func (a addressMode) String() string {
 }
 
 func operandToString(bin string) string {
+	const (
+		addressModeBitNum = 2
+		registerBitNum    = 3
+	)
 	addressModeList := []addressMode{addressModeD, addressModeI, addressModeMI, addressModeIP}
-	rawAddressMode, _ := strconv.ParseInt(bin[:2], 2, 2)
+	rawAddressMode, _ := strconv.ParseUint(bin[:2], 2, addressModeBitNum)
 	am := addressModeList[rawAddressMode]
-	registerNum, _ := strconv.ParseInt(bin[2:5], 3, 2)
+	registerNum, _ := strconv.ParseUint(bin[2:5], 2, registerBitNum)
 	switch am {
 	case addressModeD:
 		return fmt.Sprintf("R%v", registerNum)
